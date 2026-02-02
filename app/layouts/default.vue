@@ -3,10 +3,10 @@ import AppNavBar from "~/components/app/nav-bar.vue";
 </script>
 
 <template>
-    <div>
-        <AppNavBar />
-        <AppHeader />
-        <slot />
-        <AppFooter />
-    </div>
+  <div>
+    <AppNavBar />
+    <AppHeader />
+    <slot />
+    <AppFooter />
+  </div>
 </template>
