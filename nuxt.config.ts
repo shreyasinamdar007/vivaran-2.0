@@ -2,6 +2,7 @@
 import tailwindcss from "@tailwindcss/vite";
 
 import "./lib/env";
+import { useRuntimeConfig } from "nuxt/app";
 
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
@@ -17,11 +18,11 @@ export default defineNuxtConfig({
     plugins: [tailwindcss()],
   },
   runtimeConfig: {
-    mongoUri: process.env.MONGODB_URI || "",
-    jwtSecret: process.env.JWT_SECRET || "",
+    mongoDbUri: useRuntimeConfig().mongoDbUri || "mongodb://localhost:27017/vivaran",
+    jwtSecret: useRuntimeConfig().jwtSecret || "vivaran_shi_2026",
   },
   mongoose: {
-    uri: process.env.MONGODB_URI || "",
+    uri: useRuntimeConfig().mongoDbUri || "mongodb://localhost:27017/vivaran",
     options: {},
     modelsDir: "./server/models",
     devtools: true,
