@@ -17,11 +17,11 @@ export default defineNuxtConfig({
     plugins: [tailwindcss()],
   },
   runtimeConfig: {
-    mongoUri: "mongodb://localhost:27017/vivaran",
-    jwtSecret: "vivaran_shi_2026",
+    mongoUri: process.env.MONGODB_URI || "",
+    jwtSecret: process.env.JWT_SECRET || "",
   },
   mongoose: {
-    uri: "mongodb://localhost:27017/vivaran",
+    uri: process.env.MONGODB_URI || "",
     options: {},
     modelsDir: "./server/models",
     devtools: true,
