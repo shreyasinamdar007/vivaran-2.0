@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import AppNavBar from "~/components/app/nav-bar.vue";
+import AppNavBar from "~/components/nav-bar.vue";
+
+const route = useRoute();
 </script>
 
 <template>
   <div>
-    <AppNavBar />
+    <AppNavBar v-if="!route.meta.hideNavbar" />
     <AppHeader />
     <slot />
     <AppFooter />

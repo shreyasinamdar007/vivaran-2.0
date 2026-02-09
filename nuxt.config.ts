@@ -1,11 +1,13 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import tailwindcss from "@tailwindcss/vite";
 
+import "./lib/env";
+
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
-  modules: ["@nuxt/eslint", "@nuxt/icon"],
-  css: ["./app/assets/css/main.css"],
+  modules: ["@nuxt/eslint", "@nuxt/icon", "nuxt-mongoose"],
+  css: ["./assets/css/main.css"],
   eslint: {
     config: {
       standalone: false,
@@ -14,4 +16,15 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+  runtimeConfig: {
+    mongoUri: "mongodb://localhost:27017/vivaran",
+    jwtSecret: "vivaran_shi_2026",
+  },
+  mongoose: {
+    uri: "mongodb://localhost:27017/vivaran",
+    options: {},
+    modelsDir: "./server/models",
+    devtools: true,
+  },
+  ssr: true,
 });

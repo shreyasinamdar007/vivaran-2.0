@@ -1,3 +1,6 @@
+<script setup lang="ts">
+</script>
+
 <template>
   <div class="hero bg-base-200 min-h-screen">
     <div class="hero-content">
@@ -10,8 +13,8 @@
           calculations, and effortless reporting.
         </p>
         <button class="btn btn-accent text-white">
-          Sign In with GitHub
-          <Icon name="tabler:brand-github" size="24" />
+          Sign In
+          <Icon name="solar:login-2-linear" size="24" />
         </button>
       </div>
     </div>
