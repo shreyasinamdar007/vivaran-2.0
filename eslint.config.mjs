@@ -29,4 +29,12 @@ export default withNuxt(antfu({
       ignore: ["README.md"],
     }],
   },
+  overrides: [
+    {
+      files: ["nuxt.config.ts"],
+      rules: {
+        "node/no-process-env": "off",
+      },
+    },
+  ],
 }));
