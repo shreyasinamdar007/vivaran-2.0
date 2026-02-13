@@ -37,7 +37,7 @@ export default withNuxt(
 
   // ✅ Flat-config replacement for "overrides"
   {
-    files: ["nuxt.config.ts"],
+    files: ["nuxt.config.ts", "server/plugins/mongodb.ts"],
     rules: {
       "node/no-process-env": "off",
     },

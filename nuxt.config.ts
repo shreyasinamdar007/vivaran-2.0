@@ -2,9 +2,12 @@
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineNuxtConfig({
+  app: {
+    pageTransition: { name: "page", mode: "out-in" },
+  },
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
-  modules: ["@nuxt/eslint", "@nuxt/icon", "nuxt-mongoose"],
+  modules: ["@nuxt/eslint", "@nuxt/icon", "nuxt-mongoose", "@pinia/nuxt"],
   css: ["./assets/css/main.css"],
   eslint: {
     config: {
@@ -15,7 +18,7 @@ export default defineNuxtConfig({
     plugins: [tailwindcss()],
   },
   runtimeConfig: {
-    mongoDbUri: process.env.MONGODB_URI,
+    mongoUri: process.env.MONGODB_URI,
     jwtSecret: process.env.JWT_SECRET,
   },
   mongoose: {

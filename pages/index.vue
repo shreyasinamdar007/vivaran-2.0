@@ -12,7 +12,7 @@
           Simplified billing and GST compliance in one seamless flow. Accurate invoices, real-time tax
           calculations, and effortless reporting.
         </p>
-        <button class="btn btn-accent text-white">
+        <button class="btn btn-accent text-white" @click="() => navigateTo('/login')">
           Sign In
           <Icon name="solar:login-2-linear" size="24" />
         </button>
