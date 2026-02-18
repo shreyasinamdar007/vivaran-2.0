@@ -15,7 +15,7 @@ async function logout() {
 
 <template>
   <div class="mx-auto p-2">
-    <h1 class="text-3xl font-bold mb-4">
+    <h1 class="font-heading text-3xl font-bold mb-4">
       Welcome to the Home Page
     </h1>
     <p class="text-lg">
