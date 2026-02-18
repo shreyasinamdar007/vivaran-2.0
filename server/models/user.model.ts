@@ -3,16 +3,15 @@ import mongoose from "mongoose";
 
 const UserSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true, lowercase: true, trim: true, match: [/^\S[^\s@]*@\S[^\s.]*\.\S+$/, "Please use a valid email address"] },
-  password: { type: String, required: true },
+  password: { type: String, required: true, select: false },
   createdAt: { type: Date, default: Date.now },
 }, { timestamps: true });
 
-UserSchema.pre("save", async function (next) {
+UserSchema.pre("save", async function () {
   if (!this.isModified("password")) {
-    return next;
+    return;
   }
   this.password = await bcrypt.hash(this.password, 16);
-  next();
 });
 
 UserSchema.methods.comparePassword = async function (candidatePassword: string) {
