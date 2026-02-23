@@ -24,8 +24,14 @@ const emit = defineEmits<{
 
     <Field v-slot="{ field }" :name="name" :rules="rules">
       <input
-        v-bind="field" class="grow" :type="type" :placeholder="label" :pattern="pattern" :minlength="minlength"
-        :maxlength="maxlength" :value="modelValue"
+        v-bind="field"
+        class="grow"
+        :type="type"
+        :placeholder="label"
+        :pattern="pattern"
+        :minlength="minlength"
+        :maxlength="maxlength"
+        :value="modelValue"
         @input="emit('update:modelValue', ($event.target as HTMLInputElement).value)"
       >
     </Field>

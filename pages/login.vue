@@ -53,13 +53,25 @@ async function onSubmit() {
         </div>
         <Form class="w-3/4 flex flex-col items-center gap-y-3" :validation-schema="validateSchema" @submit="onSubmit">
           <InputField
-            v-model="email" icon="ic:sharp-email" label="Email" type="email" name="email"
-            error-message="Please enter a valid email address." :minlength="1" :error="true"
+            v-model="email"
+            icon="ic:sharp-email"
+            label="Email"
+            type="email"
+            name="email"
+            error-message="Please enter a valid email address."
+            :minlength="1"
+            :error="true"
             :rules="loginSchema.email"
           />
           <InputField
-            v-model="password" icon="ic:sharp-lock" label="Password" type="password" name="password"
-            error-message="Password must be at least 8 characters long." :error="true" :rules="loginSchema.password"
+            v-model="password"
+            icon="ic:sharp-lock"
+            label="Password"
+            type="password"
+            name="password"
+            error-message="Password must be at least 8 characters long."
+            :error="true"
+            :rules="loginSchema.password"
             :minlength="8"
           />
           <button type="submit" class="btn btn-primary w-3/4 mt-4">
