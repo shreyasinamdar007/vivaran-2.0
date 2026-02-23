@@ -35,7 +35,8 @@ const typeConfig = {
   <div class="fixed top-5 right-5 z-[9999] space-y-4">
     <TransitionGroup name="toast">
       <div
-        v-for="toast in toastStore.toasts" :key="toast.id"
+        v-for="toast in toastStore.toasts"
+        :key="toast.id"
         class="w-80 rounded-2xl flex shadow-2xl overflow-hidden relative"
       >
         <!-- Left Accent Bar -->

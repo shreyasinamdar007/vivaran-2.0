@@ -15,7 +15,9 @@ defineProps<{
     <label class="text-sm font-medium text-white">{{ label }}</label>
     <Field v-slot="{ field, meta }" :name="name">
       <input
-        v-bind="field" :type="type || 'text'" :disabled="disabled"
+        v-bind="field"
+        :type="type || 'text'"
+        :disabled="disabled"
         class="w-full h-12 px-4 rounded-xl bg-transparent text-white outline-none border transition-all duration-200"
         :class="[
           disabled ? 'opacity-50 cursor-not-allowed bg-white/5 border-white/10'

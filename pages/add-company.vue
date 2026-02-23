@@ -49,7 +49,9 @@ async function submitForm(values: any, { resetForm }: any) {
         <BaseInput name="name" label="Company Name" />
 
         <BaseSelect
-          name="company_type" label="Company Type" :options="[
+          name="company_type"
+          label="Company Type"
+          :options="[
             { label: 'Sales', value: 'sales' },
             { label: 'Purchase', value: 'purchase' },
           ]"
@@ -84,10 +86,7 @@ async function submitForm(values: any, { resetForm }: any) {
     </BaseFormSection>
 
     <!-- Submit -->
-    <button
-      type="submit" class="bg-blue-600 hover:bg-blue-700 cursor-pointer text-white px-6 py-2 rounded-xl
-             font-medium transition shadow-lg shadow-blue-500/20"
-    >
+    <button type="submit" class="btn btn-primary text-white font-medium">
       Add Company
     </button>
   </Form>

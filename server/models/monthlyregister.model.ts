@@ -2,13 +2,15 @@ import mongoose, { Schema } from "mongoose";
 
 const BillSchema = new Schema(
   {
-    bill_no: { type: String, required: true, trim: true },
+    invoiceNo: { type: String, required: true, trim: true },
 
-    date: { type: Date, required: true },
+    invoiceDate: { type: Date, required: true },
 
-    company_name: { type: String, required: true, trim: true },
+    companyName: { type: String, required: true, trim: true },
 
-    gst_no: {
+    gstType: { type: String, required: true, trim: true },
+
+    gstNo: {
       type: String,
       required: true,
       uppercase: true,
@@ -16,26 +18,15 @@ const BillSchema = new Schema(
       match: [/^[0-9A-Z]{15}$/, "Invalid GST number"],
     },
 
-    gross_total: { type: Number, required: true, default: 0 },
+    grossAmount: { type: Number, required: true, default: 0 },
 
-    sgst9: { type: Number, default: 0 },
-    cgst9: { type: Number, default: 0 },
-    igst18: { type: Number, default: 0 },
+    sgst: { type: Number, default: 0 },
+    cgst: { type: Number, default: 0 },
+    igst: { type: Number, default: 0 },
 
-    sgst14: { type: Number, default: 0 },
-    cgst14: { type: Number, default: 0 },
+    totalTax: { type: Number, default: 0 },
 
-    igst28: { type: Number, default: 0 },
-
-    sgst6: { type: Number, default: 0 },
-    cgst6: { type: Number, default: 0 },
-
-    total_tax: { type: Number, default: 0 },
-
-    total_items: { type: Number, default: 0 },
-    total_quantity: { type: Number, default: 0 },
-
-    net_total: { type: Number, required: true, default: 0 },
+    totalAfterTax: { type: Number, required: true, default: 0 },
   },
   { _id: false },
 );
@@ -78,14 +69,14 @@ const MonthlyRegisterSchema = new Schema(
       default: [],
     },
 
-    purchase_gross_total: { type: Number, default: 0 },
-    sales_gross_total: { type: Number, default: 0 },
+    purchaseGrossTotal: { type: Number, default: 0 },
+    salesGrossTotal: { type: Number, default: 0 },
 
-    sales_net_total: { type: Number, default: 0 },
-    purchase_net_total: { type: Number, default: 0 },
+    salesNetTotal: { type: Number, default: 0 },
+    purchaseNetTotal: { type: Number, default: 0 },
 
-    purchase_gst_total: { type: Number, default: 0 },
-    sales_gst_total: { type: Number, default: 0 },
+    purchaseGstTotal: { type: Number, default: 0 },
+    salesGstTotal: { type: Number, default: 0 },
   },
   { timestamps: true },
 );
