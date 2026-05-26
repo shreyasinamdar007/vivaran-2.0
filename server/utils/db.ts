@@ -1,3 +1,5 @@
 import { defineMongooseConnection } from "#nuxt/mongoose";
 
-export const connection = defineMongooseConnection("mongodb://localhost:27017/vivaran");
+const uri = process.env.MONGODB_URI || "mongodb://localhost:27017/vivaran";
+
+export const connection = defineMongooseConnection(uri);
