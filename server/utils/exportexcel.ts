@@ -10,18 +10,19 @@ export async function exportMonthlyRegisterToExcel(
   const workbook = new ExcelJS.Workbook();
 
   // Common columns for both sheets
-  const columns = [
+  const baseColumns = [
     { header: "Invoice No", key: "invoiceNo", width: 18 },
     { header: "Invoice Date", key: "invoiceDate", width: 15 },
     { header: "Company Name", key: "companyName", width: 30 },
     { header: "GST No", key: "gstNo", width: 18 },
-    { header: "GST Type", key: "gstType", width: 20 },
     { header: "Gross Amount", key: "grossAmount", width: 15 },
     { header: "CGST", key: "cgst", width: 15 },
     { header: "SGST", key: "sgst", width: 15 },
     { header: "IGST", key: "igst", width: 15 },
     { header: "Total Tax", key: "totalTax", width: 15 },
     { header: "Total After Tax", key: "totalAfterTax", width: 18 },
+    { header: "Number of Items", key: "numberOfItems", width: 15 },
+    { header: "Total Quantity", key: "totalQuantity", width: 15 },
   ];
 
   // Helper to create sheet
@@ -32,13 +33,19 @@ export async function exportMonthlyRegisterToExcel(
     gstTotal: number,
     netTotal: number,
   ) => {
+    const isSales = name === "Sales";
+    const columns = isSales
+      ? [...baseColumns, { header: "HSN Code", key: "hsnCode", width: 15 }]
+      : baseColumns;
+
     const sheet = workbook.addWorksheet(name);
 
     // Set column widths and keys (without auto-generating a header row)
     sheet.columns = columns.map(({ key, width }) => ({ key, width }));
 
-    // Row 1: Month + Year title
-    sheet.mergeCells("A1", "K1");
+    // Row 1: Month + Year title (merge across all columns)
+    const lastCol = String.fromCharCode(64 + columns.length); // A=1, B=2, ...
+    sheet.mergeCells("A1", `${lastCol}1`);
     sheet.getCell("A1").value = `Month: ${register.month} | Year: ${register.year}`;
     sheet.getCell("A1").font = { bold: true, size: 14 };
     sheet.getCell("A1").alignment = { horizontal: "center" };
@@ -50,24 +57,33 @@ export async function exportMonthlyRegisterToExcel(
     const headerRow = sheet.addRow(columns.map(col => col.header));
     headerRow.font = { bold: true };
     headerRow.eachCell((cell) => {
-      cell.fill = {
-        type: "pattern",
-        pattern: "solid",
-        fgColor: { argb: "FF0D9488" }, // teal-600
-      };
+      cell.fill = name === "Sales"
+        ? {
+            type: "pattern",
+            pattern: "solid",
+            fgColor: { argb: "0D9488" }, // teal-600
+          }
+        : {
+            type: "pattern",
+            pattern: "solid",
+            fgColor: { argb: "a91d1d" }, // red-800
+          };
       cell.font = { bold: true, color: { argb: "FFFFFFFF" } };
       cell.alignment = { horizontal: "center" };
     });
 
     // Data rows
     data.forEach((bill) => {
-      sheet.addRow({
+      const rowData: Record<string, any> = {
         ...bill,
-        gstType: bill.gstType === "inter_state" ? "9% CGST + 9% SGST" : "18% IGST",
         invoiceDate: bill.invoiceDate
           ? new Date(bill.invoiceDate).toLocaleDateString("en-GB")
           : "",
-      }).alignment = { horizontal: "center" };
+      };
+      if (isSales) {
+        rowData.hsnCode = 8504;
+      }
+      sheet.addRow(rowData).alignment = { horizontal: "center" };
     });
 
     // Calculate CGST, SGST, IGST totals

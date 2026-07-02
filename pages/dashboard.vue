@@ -1,15 +1,23 @@
 <script setup lang="ts">
 import { useAuthStore } from "~/stores/auth/auth";
+import { useLoaderStore } from "~/stores/loader/loader";
 
 definePageMeta({
   middleware: "auth",
   layout: "dashboard",
 });
 const auth = useAuthStore();
+const loader = useLoaderStore();
 
 async function logout() {
-  await auth.logout();
-  await navigateTo("/login");
+  loader.show("Logging out...");
+  try {
+    await auth.logout();
+    await navigateTo("/login");
+  }
+  finally {
+    loader.hide();
+  }
 }
 </script>
 

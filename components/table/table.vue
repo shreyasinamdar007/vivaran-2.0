@@ -32,7 +32,7 @@ watch(searchQuery, () => {
 // Reset to page 1 when data changes
 watch(() => props.data, () => {
   currentPage.value = 1;
-}, { deep: true });
+});
 
 // Filter data based on search query and searchKeys
 const filteredData = computed(() => {

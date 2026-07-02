@@ -27,6 +27,9 @@ const BillSchema = new Schema(
     totalTax: { type: Number, default: 0 },
 
     totalAfterTax: { type: Number, required: true, default: 0 },
+
+    numberOfItems: { type: Number, default: 0 },
+    totalQuantity: { type: Number, default: 0 },
   },
   { _id: false },
 );

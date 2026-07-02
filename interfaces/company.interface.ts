@@ -36,6 +36,9 @@ export type Company = {
   extraCharge: number;
   totalTax: number;
   totalAfterTax: number;
+
+  numberOfItems: number;
+  totalQuantity: number;
 };
 
 export type Month

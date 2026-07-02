@@ -1,8 +1,25 @@
 <script setup lang="ts">
-import { Chart, registerables } from "chart.js";
-import { onMounted, ref, watch } from "vue";
+import {
+  BarController,
+  BarElement,
+  CategoryScale,
+  Chart,
+  Legend,
+  LinearScale,
+  Title,
+  Tooltip,
+} from "chart.js";
+import { onMounted, onUnmounted, ref, watch } from "vue";
 
-Chart.register(...registerables);
+Chart.register(
+  BarController,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  Title,
+  Tooltip,
+  Legend,
+);
 
 const { data, pending, error } = await useFetch("/api/mrgraphs");
 const canvasRef = ref<HTMLCanvasElement | null>(null);
@@ -140,6 +157,13 @@ onMounted(() => {
 
 watch([data, activeFilter], () => {
   renderChart();
+});
+
+onUnmounted(() => {
+  if (chartInstance) {
+    chartInstance.destroy();
+    chartInstance = null;
+  }
 });
 </script>
 
