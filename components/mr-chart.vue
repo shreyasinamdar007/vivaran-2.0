@@ -176,25 +176,19 @@ onUnmounted(() => {
           Monthly Overview
         </h3>
         <div class="join">
-          <button
-            class="btn btn-sm join-item"
+          <button class="btn btn-sm join-item"
             :class="activeFilter === 'grossTotal' ? 'btn-primary' : 'btn-outline border-base-300'"
-            @click="activeFilter = 'grossTotal'"
-          >
+            @click="activeFilter = 'grossTotal'">
             Gross Total
           </button>
-          <button
-            class="btn btn-sm join-item"
+          <button class="btn btn-sm join-item"
             :class="activeFilter === 'netTotal' ? 'btn-primary' : 'btn-outline border-base-300'"
-            @click="activeFilter = 'netTotal'"
-          >
+            @click="activeFilter = 'netTotal'">
             Net Total
           </button>
-          <button
-            class="btn btn-sm join-item"
+          <button class="btn btn-sm join-item"
             :class="activeFilter === 'gstTotal' ? 'btn-primary' : 'btn-outline border-base-300'"
-            @click="activeFilter = 'gstTotal'"
-          >
+            @click="activeFilter = 'gstTotal'">
             GST Total
           </button>
         </div>
@@ -206,10 +200,8 @@ onUnmounted(() => {
       <div v-else-if="error" class="text-error flex justify-center items-center h-80">
         Error loading data: {{ error.message }}
       </div>
-      <div
-        v-else-if="!data?.data || data.data.length === 0"
-        class="flex flex-col justify-center items-center h-80 text-base-content/50"
-      >
+      <div v-else-if="!data?.data || data.data.length === 0"
+        class="flex flex-col justify-center items-center h-80 text-base-content/50">
         <Icon name="solar:chart-square-linear" size="48" class="mb-2 opacity-50" />
         <p>No registers available to display.</p>
       </div>
