@@ -57,15 +57,17 @@ export async function exportMonthlyRegisterToExcel(
     const headerRow = sheet.addRow(columns.map(col => col.header));
     headerRow.font = { bold: true };
     headerRow.eachCell((cell) => {
-      cell.fill = name === "Sales" ? {
-        type: "pattern",
-        pattern: "solid",
-        fgColor: { argb: "0D9488" }, // teal-600
-      } : {
-        type: "pattern",
-        pattern: "solid",
-        fgColor: { argb: "a91d1d" }, // red-800
-      };
+      cell.fill = name === "Sales"
+        ? {
+            type: "pattern",
+            pattern: "solid",
+            fgColor: { argb: "0D9488" }, // teal-600
+          }
+        : {
+            type: "pattern",
+            pattern: "solid",
+            fgColor: { argb: "a91d1d" }, // red-800
+          };
       cell.font = { bold: true, color: { argb: "FFFFFFFF" } };
       cell.alignment = { horizontal: "center" };
     });
