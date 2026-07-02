@@ -110,6 +110,8 @@ const schemas = [
     extraCharge: z.number().default(0),
     totalTax: z.number().optional().default(0),
     totalAfterTax: z.number().optional().default(0),
+    numberOfItems: z.number().default(0),
+    totalQuantity: z.number().default(0),
   }),
 ];
 
@@ -123,6 +125,8 @@ const cgstTotal = sumField("cgst");
 const sgstTotal = sumField("sgst");
 const totalTaxTotal = sumField("totalTax");
 const grandTotal = sumField("totalAfterTax");
+const numberOfItemsTotal = sumField("numberOfItems");
+const totalQuantityTotal = sumField("totalQuantity");
 
 // ── Table column definitions ────────────────────────────
 type TableColumn = {
@@ -151,6 +155,8 @@ const tableColumns: TableColumn[] = [
   { label: "SGST (9%)", key: "sgst", align: "right", format: v => `₹${v}`, totalValue: () => sgstTotal.value },
   { label: "Total Tax", key: "totalTax", align: "right", format: v => `₹${v}`, totalValue: () => totalTaxTotal.value },
   { label: "Total", key: "totalAfterTax", align: "right", format: v => `₹${v}`, bold: true, totalValue: () => grandTotal.value },
+  { label: "No. of Items", key: "numberOfItems", align: "right", totalValue: () => numberOfItemsTotal.value },
+  { label: "Total Qty", key: "totalQuantity", align: "right", totalValue: () => totalQuantityTotal.value },
   { label: "Actions", key: "actions", align: "center" },
 ];
 
@@ -195,6 +201,8 @@ function handleStepSubmit(values: Record<string, any>, { resetForm }: { resetFor
       gstNo: null,
       extraCharge: 0,
       totalTax: 0,
+      numberOfItems: 0,
+      totalQuantity: 0,
       totalAfterTax: 0,
       cgst: 0,
       sgst: 0,
@@ -233,6 +241,8 @@ async function createExcelSheet() {
     salesGstTotal: salesTotals.gst,
     purchaseGstTotal: purchaseTotals.gst,
   };
+
+  loader.show("Generating Excel Sheet...");
 
   try {
     const response = await $fetch.raw("/api/monthlyregister", {
@@ -368,6 +378,20 @@ function onExtraChargeInput(e: Event, values: Record<string, any>, setFieldValue
               </template>
               <BaseInput name="totalTax" label="Total Tax" disabled />
               <BaseInput name="totalAfterTax" label="Total After Tax" disabled />
+            </div>
+
+            <!-- Items & Quantity row -->
+            <div class="md:col-span-4 grid grid-cols-2 gap-4">
+              <BaseInput
+                name="numberOfItems"
+                label="Number of Items"
+                type="number"
+              />
+              <BaseInput
+                name="totalQuantity"
+                label="Total Quantity"
+                type="number"
+              />
             </div>
           </div>
 

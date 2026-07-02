@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Icon } from "@iconify/vue";
 import { ErrorMessage, Field } from "vee-validate";
-import { ref, watch } from "vue";
+import { onUnmounted, ref, watch } from "vue";
 
 type Option<T = unknown> = {
   label: string;
@@ -54,6 +54,11 @@ watch(query, (val) => {
       isLoading.value = false;
     }
   }, 300);
+});
+
+onUnmounted(() => {
+  if (debounceTimer)
+    clearTimeout(debounceTimer);
 });
 
 function selectOption(
